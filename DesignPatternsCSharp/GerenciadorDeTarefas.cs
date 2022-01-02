@@ -1,28 +1,26 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using DesignPatternsCSharp.Solid.SingleResponsibilityPrinciple;
 
 namespace DesignPatternsCSharp
 {
     public class GerenciadorDeTarefas
     {
-        private static readonly Dictionary<int, Action> tarefas = new();
+        private static readonly Dictionary<int, Action> tasks = new();
 
-        public static void AddTarefa(int numero, Action tarefa)
+        public static void AddTask(int number, Action task)
         {
-            tarefas.Add(numero, tarefa);
+            tasks.Add(number, task);
         }
 
-        public static void ExecutarTarefa(int numero)
+        public static void ExecuteTask(int number)
         {
             try
             {
-                tarefas[numero].Invoke();
+                tasks[number].Invoke();
             }
             catch (Exception _)
             {
-                throw new ArgumentException($"A tarefa de numero: {numero} nao existe");
+                throw new ArgumentException($"A tarefa de numero: {number} nao existe");
             }
         }
     }
