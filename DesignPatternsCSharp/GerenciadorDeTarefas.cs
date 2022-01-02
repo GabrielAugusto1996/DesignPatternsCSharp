@@ -6,21 +6,34 @@ namespace DesignPatternsCSharp
     public class GerenciadorDeTarefas
     {
         private static readonly Dictionary<int, Action> tasks = new();
+        private static int count = 1;
 
-        public static void AddTask(int number, Action task)
+        public static string AddTask(string title, Action task)
         {
-            tasks.Add(number, task);
+            tasks.Add(count, task);
+
+            var titleWithCount = $"{count} - {title}";
+
+            ++count;
+            return titleWithCount;
         }
 
         public static void ExecuteTask(int number)
         {
-            try
+            if (number >= count)
             {
-                tasks[number].Invoke();
+                tasks[count - 1].Invoke();
             }
-            catch (Exception _)
+            else
             {
-                throw new ArgumentException($"A tarefa de numero: {number} nao existe");
+                try
+                {
+                    tasks[number].Invoke();
+                }
+                catch (Exception _)
+                {
+                    throw new ArgumentException($"A tarefa de numero: {number} nao existe");
+                }
             }
         }
     }
