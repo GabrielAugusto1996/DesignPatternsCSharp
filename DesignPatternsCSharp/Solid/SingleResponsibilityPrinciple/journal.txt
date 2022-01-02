@@ -1,0 +1,2 @@
+1: I am a new journal
+2: I am the second journal
